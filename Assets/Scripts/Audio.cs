@@ -9,6 +9,8 @@ public class Audio : MonoBehaviour
     public GameObject A3;
     public GameObject D3;
     public GameObject E3;
+    public GameObject G3;
+    public GameObject C3;
 
     void Awake()
     {
@@ -29,6 +31,12 @@ public class Audio : MonoBehaviour
                 break;
             case 6:
                 noteObject = Instantiate(A3);
+                break;
+            case 5:
+                noteObject = Instantiate(G3);
+                break;
+            case 1:
+                noteObject = Instantiate(C3);
                 break;
         }
         noteObject.transform.parent = transform;
