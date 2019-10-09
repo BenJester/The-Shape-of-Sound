@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SongClip : MonoBehaviour
 {
     public List<int> notes;
-    int index;
+    public int index;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class SongClip : MonoBehaviour
 
     void PlayNext()
     {
-        if (index >= notes.Count) return;
+        if (index >= notes.Count) index = 0;
         Audio.Instance.PlayNote(notes[index]);
         index += 1;
     }
