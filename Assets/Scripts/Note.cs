@@ -19,6 +19,6 @@ public class Note : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= 8f) Destroy(gameObject);
+        if (timer >= 3f) Destroy(gameObject);
     }
 }

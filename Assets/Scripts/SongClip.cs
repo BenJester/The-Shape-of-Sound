@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SongClip : MonoBehaviour
 {
+    public KeyCode key;
     public List<int> notes;
     public int index;
 
@@ -16,7 +17,7 @@ public class SongClip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(key))
         {
             PlayNext();
         }
