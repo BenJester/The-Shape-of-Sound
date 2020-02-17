@@ -11,11 +11,21 @@ public class FreePlayer : MonoBehaviour
     public AudioClip highTone;
     public AudioClip lowTone;
     public AudioClip swish;
+    public List<AudioClip> sources;
+    public static FreePlayer Instance { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
         source = GetComponent<AudioSource>();
     }
+
+    public AudioClip FindClip(int index)
+    {
+        return sources[index - 1];
+    }
+
     private void Update()
     {
         
