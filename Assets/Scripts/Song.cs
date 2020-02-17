@@ -13,6 +13,7 @@ public class Song : MonoBehaviour
     List<List<int>> sheet;
     public float currTime;
     public int index;
+    public int playIndex;
     public List<Track> tracks;
     public Track trackModeTrack;
     public GameObject notePic;
@@ -49,7 +50,8 @@ public class Song : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AutoPlay(index));
+            if (Input.GetKeyDown(trackModeTrack.key))
+                StartCoroutine(AutoPlay(playIndex));
         }
 
     }
@@ -58,12 +60,13 @@ public class Song : MonoBehaviour
     {
         //float timer = 0f;
         int currIndex = index;
-        while (currIndex < trackSheet.Count && trackSheet[currIndex] != 0)
+        while (currIndex < trackSheet.Count)
         {
             for (int i = 0; i < sheet.Count; i++)
             {
-                int instrument = sheet[i][currIndex] - 1;
-                source.PlayOneShot(FreePlayer.Instance.sources[instrument]);
+                int instrument = sheet[i][currIndex];
+                source.PlayOneShot(FreePlayer.Instance.FindClip(instrument));
+                Debug.Log(sheet[i][currIndex]);
             }
             currIndex += 1;
             yield return new WaitForSeconds(interval);
@@ -91,6 +94,7 @@ public class Song : MonoBehaviour
 
     void Update()
     {
+        Play();
         currTime += Time.deltaTime;
         if (currTime >= index * interval)
         {

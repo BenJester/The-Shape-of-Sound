@@ -23,12 +23,12 @@ public class FreePlayer : MonoBehaviour
 
     public AudioClip FindClip(int index)
     {
-        return sources[index - 1];
+        return sources[index];
     }
 
     private void Update()
     {
-        
+        return;
         if (Input.GetKeyDown(KeyCode.A))
             source.PlayOneShot(kick);
 
