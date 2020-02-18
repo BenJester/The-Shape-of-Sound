@@ -8,6 +8,13 @@ public class Track : MonoBehaviour
     public Transform finish;
     public KeyCode key;
     public AudioClip nextClip;
+    public Instrument nextInstrument;
+
+    public void Play()
+    {
+        nextInstrument.Play();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

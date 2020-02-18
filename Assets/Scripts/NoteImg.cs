@@ -12,6 +12,8 @@ public class NoteImg : MonoBehaviour
     public KeyCode key;
     float tolerance;
     Song song;
+    bool triggered;
+
     void Start()
     {
         start = transform.position;
@@ -24,7 +26,7 @@ public class NoteImg : MonoBehaviour
         this.key = key;
         this.song = song;
         this.tolerance = tolerance;
-        speed = (finish - transform.position).magnitude / delay;
+        speed = song.speed;
         currTime = delay;
     }
 
@@ -32,13 +34,16 @@ public class NoteImg : MonoBehaviour
     {
         transform.position += speed * Time.deltaTime * (finish - start).normalized;
         currTime -= Time.deltaTime;
+        if (triggered) return;
         if (Mathf.Abs(currTime) <= tolerance && Input.GetKeyDown(key))
         {
             GetComponent<SpriteRenderer>().color = Color.green;
+            triggered = true;
         }
         else if (currTime < - tolerance)
         {
             song.clear = false;
+            triggered = true;
         }
     }
 }

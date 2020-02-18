@@ -154,6 +154,7 @@ MonoBehaviour:
   rawSheet: []
   trackSheet: 
   notes: []
+  speed: 0
   currTime: 0
   index: 0
   playIndex: 0
@@ -166,6 +167,8 @@ MonoBehaviour:
   tolerance: 0
   trackMode: 0
   clear: 1
+  cycleNum: 0
+  currCycle: 0
 --- !u!4 &14837873
 Transform:
   m_ObjectHideFlags: 0
@@ -181,7 +184,7 @@ Transform:
   - {fileID: 1304762560}
   - {fileID: 436866863}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &16035201
 PrefabInstance:
@@ -410,6 +413,7 @@ MonoBehaviour:
   - 00
   trackSheet: 0100000000000000000000000000000000000000000000000000000000000000
   notes: []
+  speed: 5
   currTime: 0
   index: 0
   playIndex: 0
@@ -422,8 +426,10 @@ MonoBehaviour:
   finish: {fileID: 0}
   displayEarlyTime: 2
   tolerance: 0.1
-  trackMode: 1
-  clear: 0
+  trackMode: 0
+  clear: 1
+  cycleNum: 3
+  currCycle: 0
 --- !u!4 &212901307
 Transform:
   m_ObjectHideFlags: 0
@@ -437,7 +443,7 @@ Transform:
   m_Children:
   - {fileID: 1622149837}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &212901308
 AudioSource:
@@ -922,6 +928,7 @@ MonoBehaviour:
   rawSheet: []
   trackSheet: 
   notes: []
+  speed: 0
   currTime: 0
   index: 0
   playIndex: 0
@@ -934,6 +941,8 @@ MonoBehaviour:
   tolerance: 0
   trackMode: 0
   clear: 1
+  cycleNum: 0
+  currCycle: 0
 --- !u!4 &812907567
 Transform:
   m_ObjectHideFlags: 0
@@ -949,7 +958,7 @@ Transform:
   - {fileID: 33354188}
   - {fileID: 1686946661}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861870603
 GameObject:
@@ -1100,11 +1109,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 6.6
       objectReference: {fileID: 0}
-    - target: {fileID: 891576527613880792, guid: d7de8c2e745f3674ba80300e6a06afde,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.41
-      objectReference: {fileID: 0}
     - target: {fileID: 552807534, guid: d7de8c2e745f3674ba80300e6a06afde, type: 3}
       propertyPath: key
       value: 100
@@ -1113,6 +1117,11 @@ PrefabInstance:
       propertyPath: nextClip
       value: 
       objectReference: {fileID: 8300000, guid: b26b031ee9433ae4f82faa85890d0aed, type: 3}
+    - target: {fileID: 891576527613880792, guid: d7de8c2e745f3674ba80300e6a06afde,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.41
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7de8c2e745f3674ba80300e6a06afde, type: 3}
 --- !u!114 &864444621 stripped
@@ -1412,7 +1421,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1304762558
 PrefabInstance:
@@ -1751,7 +1760,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1477081437
 GameObject:
@@ -2188,6 +2197,7 @@ MonoBehaviour:
   rawSheet: []
   trackSheet: 
   notes: []
+  speed: 0
   currTime: 0
   index: 0
   playIndex: 0
@@ -2200,6 +2210,8 @@ MonoBehaviour:
   tolerance: 0
   trackMode: 0
   clear: 1
+  cycleNum: 0
+  currCycle: 0
 --- !u!4 &1685004205
 Transform:
   m_ObjectHideFlags: 0
@@ -2215,7 +2227,7 @@ Transform:
   - {fileID: 1060904786}
   - {fileID: 1327539841}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1686946660
 GameObject:
