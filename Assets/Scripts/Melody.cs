@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Melody : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Melody : MonoBehaviour
     public float currTime;
     public float interval;
     public int checkCycleNum;
+    public int cycleNum;
     public bool clear = true;
 
     public static Melody Instance { get; private set; }
@@ -29,29 +31,29 @@ public class Melody : MonoBehaviour
         songs[0].DisplayTrack(delay);
     }
 
-    void Play()
-    {
-        foreach (var track in tracks)
-        {
-            if (Input.GetKeyDown(track.key))
-                track.Play();
-        }
-    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(0);
+        if (index > songs.Count - 1) return;
         currTime += Time.deltaTime;
         if (currTime >= interval * checkCycleNum * songs[index].rawSheet.Count + delay)
         {
             if (clear)
             {
                 index += 1;
+                if (index > songs.Count - 1)
+                {
+                    Camera.main.backgroundColor = Color.white;
+                    return;
+                }
             }
             else
             {
                 clear = true;
-                currTime = 0f;
             }
+            currTime = 0f;
             songs[index].DisplayTrack(songs[index].rawSheet.Count * interval);
         }
     }

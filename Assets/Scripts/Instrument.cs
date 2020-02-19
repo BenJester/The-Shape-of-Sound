@@ -15,7 +15,7 @@ public class Instrument : MonoBehaviour
     private void Start()
     {
         ProcessSheet();
-
+        source = GetComponent<AudioSource>();
     }
 
     public void Play()
@@ -28,6 +28,7 @@ public class Instrument : MonoBehaviour
 
     void ProcessSheet()
     {
+        if (!useSheet) return;
         sheet = new List<List<int>>();
         for (int i = 0; i < rawSheet[0].Length; i++)
         {
@@ -54,8 +55,9 @@ public class Instrument : MonoBehaviour
             for (int i = 0; i < sheet.Count; i++)
             {
                 int instrument = sheet[i][currIndex];
-                source.PlayOneShot(FreePlayer.Instance.FindClip(instrument));
-                Debug.Log(sheet[i][currIndex]);
+                if (instrument > 0)
+                    Melody.Instance.instruments[instrument].Play();
+                
             }
             currIndex += 1;
             yield return new WaitForSeconds(Melody.Instance.interval);

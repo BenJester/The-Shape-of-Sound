@@ -7,7 +7,7 @@ public class Track : MonoBehaviour
     public Transform start;
     public Transform finish;
     public KeyCode key;
-    public AudioClip nextClip;
+    //public AudioClip nextClip;
     public Instrument nextInstrument;
 
     public void Play()
@@ -24,6 +24,7 @@ public class Track : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(key))
+            nextInstrument.Play();
     }
 }

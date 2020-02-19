@@ -16,7 +16,7 @@ public class Song : MonoBehaviour
     public int index;
     public int playIndex;
     public List<Track> tracks;
-    public Track trackModeTrack;
+    //public Track trackModeTrack;
     public GameObject notePic;
     public GameObject start;
     public GameObject finish;
@@ -34,46 +34,6 @@ public class Song : MonoBehaviour
         interval = 60f / (bpm * 2);
         source = GetComponent<AudioSource>();
         ProcessSheet();
-    }
-
-    void ProcessTrackSheet()
-    {
-
-    }
-
-    void Play()
-    {
-        if (!trackMode)
-        {
-            foreach (var track in tracks)
-            {
-                if (Input.GetKeyDown(track.key))
-                    source.PlayOneShot(track.nextClip);
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(trackModeTrack.key))
-                StartCoroutine(AutoPlay(playIndex));
-        }
-
-    }
-
-    IEnumerator AutoPlay(int index)
-    {
-        //float timer = 0f;
-        int currIndex = index;
-        while (currIndex < trackSheet.Count)
-        {
-            for (int i = 0; i < sheet.Count; i++)
-            {
-                int instrument = sheet[i][currIndex];
-                source.PlayOneShot(FreePlayer.Instance.FindClip(instrument));
-                Debug.Log(sheet[i][currIndex]);
-            }
-            currIndex += 1;
-            yield return new WaitForSeconds(interval);
-        }
     }
 
     void ProcessSheet()
@@ -97,38 +57,48 @@ public class Song : MonoBehaviour
 
     void Update()
     {
-        //Play();
-        currTime += Time.deltaTime;
-        if (currTime >= index * interval)
-        {
-            //if (!trackMode)
-                //DisplayNext();
-            //else
-                //DisplayNextTrackMode();
-        }
+
     }
 
 
-    IEnumerator ChangeClip(Track track, AudioClip clip, float delay)
+    IEnumerator ChangeClip(Track track, Instrument clip, float delay)
     {
         yield return new WaitForSeconds(delay);
-        track.nextClip = clip;
-        
+        track.nextInstrument = clip;
     }
 
     public void DisplayTrack(float delay)
     {
-        for (int k = 0; k < cycleNum; k ++)
+        // find first instrument
+        for (int i = 0; i < sheet.Count; i++)
+        {
+            for (int j = 0; j < sheet[0].Count; j++)
+            {
+                if (sheet[i][j] != 0)
+                {
+                    StartCoroutine(ChangeClip(tracks[i], Melody.Instance.instruments[sheet[i][j]], 0f));
+                    break;
+                }
+            }
+        }
+
+        for (int k = 0; k < Melody.Instance.cycleNum; k ++)
         {
             for (int i = 0; i < sheet.Count; i++)
             {
                 for (int j = 0; j < sheet[0].Count; j++)
                 {
+                    float waitTime = interval * (j + k * sheet[0].Count) + delay;
+                    Debug.Log((j + k * sheet[0].Count));
                     if (sheet[i][j] != 0)
                     {
-                        float waitTime = interval * (j + k * sheet[0].Count) + delay;
                         GameObject notePicObj = Instantiate(notePic, tracks[i].finish.position + new Vector3(0f, speed * waitTime), Quaternion.identity, transform);
-                        notePicObj.GetComponent<NoteImg>().Init(this, tracks[i].finish.position, waitTime, tracks[i].key, tolerance);
+                        notePicObj.GetComponent<NoteImg>().Init(this, tracks[i].finish.position, waitTime, tracks[i].key, tolerance, k < Melody.Instance.checkCycleNum ? true : false);
+                        
+                    }
+                    if (j < sheet[0].Count - 1 && sheet[i][j + 1] != 0)
+                    {
+                        StartCoroutine(ChangeClip(tracks[i], Melody.Instance.instruments[sheet[i][j + 1]], waitTime + tolerance));
                     }
                 }
             }

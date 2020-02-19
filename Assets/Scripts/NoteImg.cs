@@ -13,13 +13,14 @@ public class NoteImg : MonoBehaviour
     float tolerance;
     Song song;
     bool triggered;
+    public bool check;
 
     void Start()
     {
         start = transform.position;
     }
 
-    public void Init(Song song, Vector3 finish, float delay, KeyCode key, float tolerance)
+    public void Init(Song song, Vector3 finish, float delay, KeyCode key, float tolerance, bool check)
     {
         this.finish = finish;
         this.delay = delay;
@@ -28,6 +29,7 @@ public class NoteImg : MonoBehaviour
         this.tolerance = tolerance;
         speed = song.speed;
         currTime = delay;
+        this.check = check;
     }
 
     void Update()
@@ -40,9 +42,9 @@ public class NoteImg : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.green;
             triggered = true;
         }
-        else if (currTime < - tolerance)
+        else if (currTime < - tolerance && check)
         {
-            song.clear = false;
+            Melody.Instance.clear = false;
             triggered = true;
         }
     }
